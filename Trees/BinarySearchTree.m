@@ -7,7 +7,17 @@
 //
 
 #import "BinarySearchTree.h"
+#import "Node.h"
+
+@interface BinarySearchTree ()
+
+@property (nonatomic, strong) Node* rootNode;
+
+@end
+
 
 @implementation BinarySearchTree
+
+
 
 @end
