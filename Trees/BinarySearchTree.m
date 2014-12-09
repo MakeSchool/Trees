@@ -55,23 +55,7 @@
     
     if (nodeToRemove)
     {
-        // First Case - Deleting a leaf node (node has no children)
-        if (!nodeToRemove.left && !nodeToRemove.right)
-        {
-#pragma message "implement this case!"
-        }
-        
-        // Second Case - Node has one subtree (node has only one child)
-        else if (!nodeToRemove.right != !nodeToRemove.left)  // This is a logical exclusive or (XOR), the ! coerces the pointers into BOOLs
-        {
-#pragma message "implement this case too!"
-        }
-        
-        // Third Case - Node has two subtrees (node has two children)
-        else
-        {
-#pragma message "you better believe you gotta implement this case!"
-        }
+        [self recursivelyDeleteNode:nodeToRemove];
     }
 }
 
@@ -94,6 +78,27 @@
 
 - (Node*)recursivelyFindNodeForKey:(NSString*)key withCurrentNode:(Node*)current
 {
+}
+
+// http://en.wikipedia.org/wiki/Binary_search_tree#Deletion
+
+- (void)recursivelyDeleteNode:(Node*)nodeToRemove
+{
+    // First Case - Deleting a leaf node (node has no children)
+    if (!nodeToRemove.left && !nodeToRemove.right)
+    {
+    }
+    
+    // Second Case - Node has one subtree (node has only one child)
+    else if (!nodeToRemove.right != !nodeToRemove.left)  // This is a logical exclusive or (XOR), the ! coerces the pointers into BOOLs
+    {
+    }
+    
+    // Third Case - Node has two subtrees (node has two children)
+    else
+    {
+    }
+
 }
 
 - (NSUInteger)recursivelyCountSubtreeWithCurrentNode:(Node*)current
