@@ -80,4 +80,26 @@
     return [self recursivelyCountSubtreeWithCurrentNode:self.rootNode];
 }
 
+
+// --------------------------------------
+//          Implement These!
+// --------------------------------------
+
+
+//  Add the node to it's proper place in the Binary Search Tree
+//  Don't forget to assign the parent pointer!
+- (void)recursivelyAddNode:(Node*)node withCurrentNode:(Node*)current
+{
+}
+
+- (Node*)recursivelyFindNodeForKey:(NSString*)key withCurrentNode:(Node*)current
+{
+}
+
+- (NSUInteger)recursivelyCountSubtreeWithCurrentNode:(Node*)current
+{
+}
+
+
+
 @end
