@@ -49,6 +49,32 @@
     }
 }
 
+- (void)removeObjectForKey:(NSString *)key
+{
+    Node* nodeToRemove = [self recursivelyFindNodeForKey:key withCurrentNode:self.rootNode];
+    
+    if (nodeToRemove)
+    {
+        // First Case - Deleting a leaf node (node has no children)
+        if (!nodeToRemove.left && !nodeToRemove.right)
+        {
+#pragma message "implement this case!"
+        }
+        
+        // Second Case - Node has one subtree (node has only one child)
+        else if (!nodeToRemove.right != !nodeToRemove.left)  // This is a logical exclusive or (XOR), the ! coerces the pointers into BOOLs
+        {
+#pragma message "implement this case too!"
+        }
+        
+        // Third Case - Node has two subtrees (node has two children)
+        else
+        {
+#pragma message "you better believe you gotta implement this case!"
+        }
+    }
+}
+
 - (NSUInteger)count
 {
     return [self recursivelyCountSubtreeWithCurrentNode:self.rootNode];
