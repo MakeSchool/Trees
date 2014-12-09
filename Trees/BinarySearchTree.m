@@ -90,14 +90,71 @@
 //  Don't forget to assign the parent pointer!
 - (void)recursivelyAddNode:(Node*)node withCurrentNode:(Node*)current
 {
+    NSComparisonResult comparisonResult = [current.key compare:node.key];
+    
+    if (comparisonResult == NSOrderedAscending)
+    {
+        if (current.left)
+        {
+            [self recursivelyAddNode:node withCurrentNode:current.left];
+        }
+        else
+        {
+            current.left = node;
+            node.parent = current;
+        }
+    }
+    else if (comparisonResult == NSOrderedDescending)
+    {
+        if (current.right)
+        {
+            [self recursivelyAddNode:node withCurrentNode:current.right];
+        }
+        else
+        {
+            current.right = node;
+            node.parent = current;
+        }
+    }
+    else
+    {
+        NSAssert(comparisonResult == NSOrderedSame, @"Object with key already added, cannot add again!");
+    }
 }
 
 - (Node*)recursivelyFindNodeForKey:(NSString*)key withCurrentNode:(Node*)current
 {
+    if (current)
+    {
+        NSComparisonResult comparisonResult = [current.key compare:key];
+        
+        if (comparisonResult == NSOrderedAscending)
+        {
+            return [self recursivelyFindNodeForKey:key withCurrentNode:current.left];
+        }
+        else if (comparisonResult == NSOrderedDescending)
+        {
+            return [self recursivelyFindNodeForKey:key withCurrentNode:current.right];
+        }
+        else if (comparisonResult == NSOrderedSame)
+        {
+            return current;
+        }
+    }
+    
+    return nil;
 }
 
 - (NSUInteger)recursivelyCountSubtreeWithCurrentNode:(Node*)current
 {
+    if (current)
+    {
+        return 1 + [self recursivelyCountSubtreeWithCurrentNode:current.left] + [self recursivelyCountSubtreeWithCurrentNode:current.right];
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 
