@@ -49,5 +49,9 @@
     }
 }
 
+- (NSUInteger)count
+{
+    return [self recursivelyCountSubtreeWithCurrentNode:self.rootNode];
+}
 
 @end
