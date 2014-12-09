@@ -136,16 +136,62 @@
     // First Case - Deleting a leaf node (node has no children)
     if (!nodeToRemove.left && !nodeToRemove.right)
     {
+        Node* parent = nodeToRemove.parent;
+        
+        if (parent.left == nodeToRemove)
+        {
+            parent.left = nil;
+        }
+        else
+        {
+            parent.right = nil;
+        }
     }
     
     // Second Case - Node has one subtree (node has only one child)
     else if (!nodeToRemove.right != !nodeToRemove.left)  // This is a logical exclusive or (XOR), the ! coerces the pointers into BOOLs
     {
+        Node* parent = nodeToRemove.parent;
+        Node* child;
+        
+        if (nodeToRemove.left)
+        {
+            child = nodeToRemove.left;
+        }
+        else
+        {
+            child = nodeToRemove.right;
+        }
+        
+        if (parent.left == nodeToRemove)
+        {
+            parent.left = child;
+        }
+        else
+        {
+            parent.right = child;
+        }
+        
+        child.parent = parent;
     }
     
     // Third Case - Node has two subtrees (node has two children)
     else
     {
+        // Grab the value from the in-order predecessor (left subtree's rightmost (largest) child)
+        Node* inOrderPredecessor = nodeToRemove.left;
+        
+        while (inOrderPredecessor.right)
+        {
+            inOrderPredecessor = inOrderPredecessor.right;
+        }
+        
+        // Set the node we're removing's value to the in-order predecessor's value
+        nodeToRemove.data = inOrderPredecessor.data;
+        
+        // Recursively delete the in-order predecessor
+        [self removeObjectForKey:inOrderPredecessor.key];
+        
     }
 
 }
