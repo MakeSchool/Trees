@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) Node* left;
 @property (nonatomic, strong) Node* right;
+@property (nonatomic, weak) Node* parent;
 
 @end
