@@ -133,6 +133,8 @@
 
 - (void)recursivelyDeleteNode:(Node*)nodeToRemove
 {
+    BOOL rootNodeGettingDeleted = nodeToRemove == self.rootNode;
+    
     // First Case - Deleting a leaf node (node has no children)
     if (!nodeToRemove.left && !nodeToRemove.right)
     {
@@ -142,9 +144,13 @@
         {
             parent.left = nil;
         }
-        else
+        else if (parent.right == nodeToRemove)
         {
             parent.right = nil;
+        }
+        else if (rootNodeGettingDeleted)
+        {
+            self.rootNode = nil;
         }
     }
     
@@ -167,9 +173,13 @@
         {
             parent.left = child;
         }
-        else
+        else if (parent.right == nodeToRemove)
         {
             parent.right = child;
+        }
+        else if (rootNodeGettingDeleted)
+        {
+            self.rootNode = child;
         }
         
         child.parent = parent;
@@ -188,12 +198,11 @@
         
         // Set the node we're removing's value to the in-order predecessor's value
         nodeToRemove.data = inOrderPredecessor.data;
+        nodeToRemove.key = inOrderPredecessor.key;
         
         // Recursively delete the in-order predecessor
-        [self removeObjectForKey:inOrderPredecessor.key];
-        
+        [self recursivelyDeleteNode:inOrderPredecessor];
     }
-
 }
 
 - (NSUInteger)recursivelyCountSubtreeWithCurrentNode:(Node*)current
@@ -205,6 +214,16 @@
     else
     {
         return 0;
+    }
+}
+
+- (void)recursivelyLogTree:(Node*)current
+{
+    if (current)
+    {
+        NSLog(@"%@", current.key);
+        [self recursivelyLogTree:current.left];
+        [self recursivelyLogTree:current.right];
     }
 }
 
