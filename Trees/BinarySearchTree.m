@@ -76,7 +76,7 @@
 {
     NSComparisonResult comparisonResult = [current.key compare:node.key];
     
-    if (comparisonResult == NSOrderedAscending)
+    if (comparisonResult == NSOrderedDescending)
     {
         if (current.left)
         {
@@ -88,7 +88,7 @@
             node.parent = current;
         }
     }
-    else if (comparisonResult == NSOrderedDescending)
+    else if (comparisonResult == NSOrderedAscending)
     {
         if (current.right)
         {
@@ -112,11 +112,11 @@
     {
         NSComparisonResult comparisonResult = [current.key compare:key];
         
-        if (comparisonResult == NSOrderedAscending)
+        if (comparisonResult == NSOrderedDescending)
         {
             return [self recursivelyFindNodeForKey:key withCurrentNode:current.left];
         }
-        else if (comparisonResult == NSOrderedDescending)
+        else if (comparisonResult == NSOrderedAscending)
         {
             return [self recursivelyFindNodeForKey:key withCurrentNode:current.right];
         }
